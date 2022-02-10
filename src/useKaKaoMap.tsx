@@ -54,7 +54,7 @@ function useKaKaoMap(markers: Marker[]){
 
             // 마커에 클릭 이벤트를 등록한다 (우클릭 : rightclick)
             window.kakao.maps.event.addListener(mk, 'click', function() {
-                window.location.href = `https://map.kakao.com/link/to/${marker.title},${latlng[0]},${latlng[1]}`;
+                window.open(`https://map.kakao.com/link/to/${marker.title},${latlng[0]},${latlng[1]}`);
             });
 
             
@@ -62,7 +62,7 @@ function useKaKaoMap(markers: Marker[]){
 
         // 마커가 지도 위에 표시되도록 설정합니다
         // marker.setMap(map);
-
+        return() => {console.log("제거됨");};
     }, [markers]);
 
     return container;
