@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/TransMapPage/static/js/main.399c213d.js",
+    "main.js": "/TransMapPage/static/js/main.a32da60f.js",
     "index.html": "/TransMapPage/index.html",
-    "main.399c213d.js.map": "/TransMapPage/static/js/main.399c213d.js.map"
+    "main.a32da60f.js.map": "/TransMapPage/static/js/main.a32da60f.js.map"
   },
   "entrypoints": [
-    "static/js/main.399c213d.js"
+    "static/js/main.a32da60f.js"
   ]
 }
