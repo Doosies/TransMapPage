@@ -29,30 +29,22 @@ const KaKaoMap = styled.div`
 
 function App() {
   const [text, setText] = useState('');
-  const [positions, setPositions] = useState<Marker[]>([]);
+  const [positions, setPositions] = useState<string[]>([]);
   const mapRef = useKaKaoMap(positions);
 
 
-  const handleClickOkButton = useCallback(() => {
-    let slicedText = text.split("\n");
-    slicedText = Array.from(new Set(slicedText));
-    const geocoder = new window.kakao.maps.services.Geocoder();
+  const handleClickOkButton = async () => {
+    const slicedText = Array.from( new Set(text.split("\n")) );
+    const processedText: string[] = [];
 
-    slicedText.forEach( addr => {
-      geocoder.addressSearch(addr, (result: any, status: any)=> {
-        if (status === window.kakao.maps.services.Status.OK) {
-          const coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
-          setPositions( pos => pos.concat({
-            title: addr,
-            latlng: coords,
-          }));
-        }
-      });
-    });
+    for(const t of slicedText) {
+      processedText.push(t);
+    }
+    setPositions([...positions, ...processedText]);
 
-    // console.log(slicedText);
+    
     setText('');
-  },[text]);
+  }
 
   const handleClickDeleteButton = useCallback(() => {
     setPositions([]);
