@@ -24,7 +24,7 @@ function useKaKaoMap(markers: Marker[]){
     const container = useRef(null);
 
     useEffect(() => {
-        console.log("맵 생성", markers);
+        // console.log("맵 생성", markers);
         const map = new window.kakao.maps.Map(container.current, options);
         //마커를 지도에 표시한다.
         markers.forEach(marker => {
