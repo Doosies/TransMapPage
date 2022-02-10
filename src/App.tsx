@@ -34,7 +34,8 @@ function App() {
 
 
   const handleClickOkButton = useCallback(() => {
-    const slicedText = text.split("\n");
+    let slicedText = text.split("\n");
+    slicedText = Array.from(new Set(slicedText));
     const geocoder = new window.kakao.maps.services.Geocoder();
 
     slicedText.forEach( addr => {

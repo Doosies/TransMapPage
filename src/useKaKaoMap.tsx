@@ -28,6 +28,7 @@ function useKaKaoMap(markers: Marker[]){
         const map = new window.kakao.maps.Map(container.current, options);
         //마커를 지도에 표시한다.
         markers.forEach(marker => {
+            // 마커 관련
             const latlng = [marker.latlng.getLat(), marker.latlng.getLng()];
 
             const mk = new window.kakao.maps.Marker({
@@ -36,6 +37,8 @@ function useKaKaoMap(markers: Marker[]){
                 title: marker.title,
             });
             
+
+            // 인포윈도우 관련
             var iwContent = `
             <div style="text-align: center;">
                 ${marker.title}
@@ -48,6 +51,11 @@ function useKaKaoMap(markers: Marker[]){
             });
             infowindow.open(map, mk); 
 
+
+            // 마커에 클릭 이벤트를 등록한다 (우클릭 : rightclick)
+            window.kakao.maps.event.addListener(mk, 'click', function() {
+                window.location.href = `https://map.kakao.com/link/to/${marker.title},${latlng[0]},${latlng[1]}`;
+            });
 
             
         });
