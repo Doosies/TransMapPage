@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useMemo } from 'react';
 
 declare global {
@@ -19,7 +19,7 @@ function useKaKaoMap(markers: Marker[]){
 
     const options = useMemo(() =>({
       center: new window.kakao.maps.LatLng(pos.getLat(), pos.getLng()), 
-      level: 3,
+      level: 8,
     }), [pos]);
     const container = useRef(null);
 
@@ -35,13 +35,7 @@ function useKaKaoMap(markers: Marker[]){
                 position: marker.latlng,
                 title: marker.title,
             });
-            // var iwContent = `
-            //     <div style="padding:5px;">
-            //         Hello World! <br>
-            //         <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">
-            //             길찾기
-            //         </a>
-            //     </div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+            
             var iwContent = `
             <div style="text-align: center;">
                 ${marker.title}
@@ -55,15 +49,7 @@ function useKaKaoMap(markers: Marker[]){
             infowindow.open(map, mk); 
 
 
-            // var infowindow = new window.kakao.maps.InfoWindow({
-            //     map: map,
-            //     position: marker.latlng,
-            //     content: marker
-            // });
-            // const infoWindow = new window.kakao.maps.InfoWindow({
-            //     content : '<div style="padding:5px;">인포윈도우 :D</div>' // 인포윈도우에 표시할 내
-            // });
-            // infoWindow.open(map, )
+            
         });
 
         // 마커가 지도 위에 표시되도록 설정합니다

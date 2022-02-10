@@ -78,6 +78,7 @@ const InputContainer = ({
     text
 }:InputContainerProps) => {
     // const inputRef = useRef<ChangeEvent<HTMLTextAreaElement>>();
+    console.log("인풋에서 렌더링됨");
     return (
         <InputContainerBlock>
             <InputTextArea 

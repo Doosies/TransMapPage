@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -29,28 +29,11 @@ const KaKaoMap = styled.div`
 
 function App() {
   const [text, setText] = useState('');
-  const [positions, setPositions] = useState([
-    {
-        title: '동일로 ', 
-        latlng: new window.kakao.maps.LatLng(33.450705, 126.570677)
-    },
-    {
-        title: '생태연못', 
-        latlng: new window.kakao.maps.LatLng(33.450936, 126.569477)
-    },
-    {
-        title: '텃밭', 
-        latlng: new window.kakao.maps.LatLng(33.450879, 126.569940)
-    },
-    {
-        title: '근린공원',
-        latlng: new window.kakao.maps.LatLng(33.451393, 126.570738)
-    }
-  ]);
+  const [positions, setPositions] = useState<Marker[]>([]);
   const mapRef = useKaKaoMap(positions);
 
 
-  const handleClickOkButton = () => {
+  const handleClickOkButton = useCallback(() => {
     const slicedText = text.split("\n");
     const geocoder = new window.kakao.maps.services.Geocoder();
 
@@ -68,13 +51,14 @@ function App() {
 
     // console.log(slicedText);
     setText('');
-  }
-  const handleClickDeleteButton = () => {
+  },[text]);
+
+  const handleClickDeleteButton = useCallback(() => {
     setPositions([]);
-  }
-  const handleChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  }, []);
+  const handleChangeTextArea = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
-  }
+  },[]);
   
   return (
     <StyledApp>
